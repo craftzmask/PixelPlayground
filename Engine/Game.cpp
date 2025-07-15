@@ -38,10 +38,6 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-}
-
-void Game::ComposeFrame()
-{
 	if (wnd.kbd.KeyIsPressed(VK_UP))
 	{
 		y = y - 3;
@@ -62,13 +58,21 @@ void Game::ComposeFrame()
 		x = x + 3;
 	}
 
-	int gb = 255;
 	if (wnd.kbd.KeyIsPressed(VK_CONTROL))
 	{
 		gb = 0;
 	}
+	else
+	{
+		gb = 255;
+	}
 
-	if (wnd.kbd.KeyIsPressed(VK_SHIFT))
+	shapeIsChanged = wnd.kbd.KeyIsPressed(VK_SHIFT);
+}
+
+void Game::ComposeFrame()
+{
+	if (shapeIsChanged)
 	{
 		gfx.PutPixel(x - 4, y - 5, 255, gb, gb);
 		gfx.PutPixel(x - 3, y - 5, 255, gb, gb);

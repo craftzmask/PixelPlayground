@@ -44,5 +44,7 @@ private:
 	/*  User Variables              */
 	int x = 400;
 	int y = 300;
+	int gb = 255;
+	bool shapeIsChanged = false;
 	/********************************/
 };
