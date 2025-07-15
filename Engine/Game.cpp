@@ -58,17 +58,11 @@ void Game::UpdateModel()
 		x_mobile = x_mobile + 3;
 	}
 
-	const int top_static = y_static - 5;
-	const int bottom_static = y_static + 5;
-	const int left_static = x_static - 5;
-	const int right_static = x_static + 5;
-
-	const int top_mobile = y_mobile - 5;
-	const int bottom_mobile = y_mobile + 5;
-	const int left_mobile = x_mobile - 5;
-	const int right_mobile = x_mobile + 5;
-
-	colliding = OverlapTest(x_mobile, y_mobile, x_static, y_static);
+	colliding =
+		OverlapTest(x_mobile, y_mobile, x_static0, y_static0) ||
+		OverlapTest(x_mobile, y_mobile, x_static1, y_static1) || 
+		OverlapTest(x_mobile, y_mobile, x_static2, y_static2) || 
+		OverlapTest(x_mobile, y_mobile, x_static3, y_static3);
 }
 
 void Game::DrawBox(int x, int y, int r, int g, int b)
@@ -116,6 +110,11 @@ bool Game::OverlapTest(int box0x, int box0y, int box1x, int box1y)
 
 void Game::ComposeFrame()
 {
+	DrawBox(x_static0, y_static0, 0, 255, 0);
+	DrawBox(x_static1, y_static1, 0, 255, 0);
+	DrawBox(x_static2, y_static2, 0, 255, 0);
+	DrawBox(x_static3, y_static3, 0, 255, 0);
+
 	if (colliding)
 	{
 		DrawBox(x_mobile, y_mobile, 255, 0, 0);
@@ -124,6 +123,4 @@ void Game::ComposeFrame()
 	{
 		DrawBox(x_mobile, y_mobile, 255, 255, 255);
 	}
-
-	DrawBox(x_static, y_static, 0, 255, 0);
 }

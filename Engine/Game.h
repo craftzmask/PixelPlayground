@@ -46,8 +46,14 @@ private:
 	/*  User Variables              */
 	int x_mobile = 400;
 	int y_mobile = 300;
-	int x_static = 200;
-	int y_static = 200;
+	int x_static0 = 200;
+	int y_static0 = 200;
+	int x_static1 = 300;
+	int y_static1 = 300;
+	int x_static2 = 400;
+	int y_static2 = 400;
+	int x_static3 = 500;
+	int y_static3 = 500;
 	bool colliding = false;
 	/********************************/
 };
