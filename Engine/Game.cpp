@@ -68,72 +68,62 @@ void Game::UpdateModel()
 	const int left_mobile = x_mobile - 5;
 	const int right_mobile = x_mobile + 5;
 
-	colliding = 
-		top_mobile <= bottom_static &&
-		bottom_mobile >= top_static && 
-		right_mobile >= left_static && 
-		left_mobile <= right_static;
+	colliding = OverlapTest(x_mobile, y_mobile, x_static, y_static);
+}
 
+void Game::DrawBox(int x, int y, int r, int g, int b)
+{
+	gfx.PutPixel(x - 4, y - 5, r, g, b);
+	gfx.PutPixel(x - 3, y - 5, r, g, b);
+	gfx.PutPixel(x - 5, y - 5, r, g, b);
+	gfx.PutPixel(x - 5, y - 4, r, g, b);
+	gfx.PutPixel(x - 5, y - 3, r, g, b);									 
+	gfx.PutPixel(x + 4, y - 5, r, g, b);
+	gfx.PutPixel(x + 3, y - 5, r, g, b);
+	gfx.PutPixel(x + 5, y - 5, r, g, b);
+	gfx.PutPixel(x + 5, y - 4, r, g, b);
+	gfx.PutPixel(x + 5, y - 3, r, g, b);										 
+	gfx.PutPixel(x - 4, y + 5, r, g, b);
+	gfx.PutPixel(x - 3, y + 5, r, g, b);
+	gfx.PutPixel(x - 5, y + 5, r, g, b);
+	gfx.PutPixel(x - 5, y + 4, r, g, b);
+	gfx.PutPixel(x - 5, y + 3, r, g, b);										 
+	gfx.PutPixel(x + 4, y + 5, r, g, b);
+	gfx.PutPixel(x + 3, y + 5, r, g, b);
+	gfx.PutPixel(x + 5, y + 5, r, g, b);
+	gfx.PutPixel(x + 5, y + 4, r, g, b);
+	gfx.PutPixel(x + 5, y + 3, r, g, b);
+}
 
-	if (colliding)
-	{
-		gb = 0;
-	}
-	else
-	{
-		gb = 255;
-	}
+bool Game::OverlapTest(int box0x, int box0y, int box1x, int box1y)
+{
+	const int top0 = box0y - 5;
+	const int bottom0 = box0y + 5;
+	const int left0 = box0x - 5;
+	const int right0 = box0x + 5;
+
+	const int top1 = box1y - 5;
+	const int bottom1 = box1y + 5;
+	const int left1 = box1x - 5;
+	const int right1 = box1x + 5;
+
+	return
+		top0 <= bottom1 &&
+		bottom0 >= top1 &&
+		right0 >= left1 &&
+		left0 <= right1;;
 }
 
 void Game::ComposeFrame()
 {
-	// Mobile box
-	gfx.PutPixel(x_mobile - 4, y_mobile - 5, 255, gb, gb);
-	gfx.PutPixel(x_mobile - 3, y_mobile - 5, 255, gb, gb);
-	gfx.PutPixel(x_mobile - 5, y_mobile - 5, 255, gb, gb);
-	gfx.PutPixel(x_mobile - 5, y_mobile - 4, 255, gb, gb);
-	gfx.PutPixel(x_mobile - 5, y_mobile - 3, 255, gb, gb);
+	if (colliding)
+	{
+		DrawBox(x_mobile, y_mobile, 255, 0, 0);
+	}
+	else
+	{
+		DrawBox(x_mobile, y_mobile, 255, 255, 255);
+	}
 
-	gfx.PutPixel(x_mobile + 4, y_mobile - 5, 255, gb, gb);
-	gfx.PutPixel(x_mobile + 3, y_mobile - 5, 255, gb, gb);
-	gfx.PutPixel(x_mobile + 5, y_mobile - 5, 255, gb, gb);
-	gfx.PutPixel(x_mobile + 5, y_mobile - 4, 255, gb, gb);
-	gfx.PutPixel(x_mobile + 5, y_mobile - 3, 255, gb, gb);
-
-	gfx.PutPixel(x_mobile - 4, y_mobile + 5, 255, gb, gb);
-	gfx.PutPixel(x_mobile - 3, y_mobile + 5, 255, gb, gb);
-	gfx.PutPixel(x_mobile - 5, y_mobile + 5, 255, gb, gb);
-	gfx.PutPixel(x_mobile - 5, y_mobile + 4, 255, gb, gb);
-	gfx.PutPixel(x_mobile - 5, y_mobile + 3, 255, gb, gb);
-
-	gfx.PutPixel(x_mobile + 4, y_mobile + 5, 255, gb, gb);
-	gfx.PutPixel(x_mobile + 3, y_mobile + 5, 255, gb, gb);
-	gfx.PutPixel(x_mobile + 5, y_mobile + 5, 255, gb, gb);
-	gfx.PutPixel(x_mobile + 5, y_mobile + 4, 255, gb, gb);
-	gfx.PutPixel(x_mobile + 5, y_mobile + 3, 255, gb, gb);
-
-	// Static box
-	gfx.PutPixel(x_static - 4, y_static - 5, 0, 255, 0);
-	gfx.PutPixel(x_static - 3, y_static - 5, 0, 255, 0);
-	gfx.PutPixel(x_static - 5, y_static - 5, 0, 255, 0);
-	gfx.PutPixel(x_static - 5, y_static - 4, 0, 255, 0);
-	gfx.PutPixel(x_static - 5, y_static - 3, 0, 255, 0);
-				   				 			
-	gfx.PutPixel(x_static + 4, y_static - 5, 0, 255, 0);
-	gfx.PutPixel(x_static + 3, y_static - 5, 0, 255, 0);
-	gfx.PutPixel(x_static + 5, y_static - 5, 0, 255, 0);
-	gfx.PutPixel(x_static + 5, y_static - 4, 0, 255, 0);
-	gfx.PutPixel(x_static + 5, y_static - 3, 0, 255, 0);
-				   				 			
-	gfx.PutPixel(x_static - 4, y_static + 5, 0, 255, 0);
-	gfx.PutPixel(x_static - 3, y_static + 5, 0, 255, 0);
-	gfx.PutPixel(x_static - 5, y_static + 5, 0, 255, 0);
-	gfx.PutPixel(x_static - 5, y_static + 4, 0, 255, 0);
-	gfx.PutPixel(x_static - 5, y_static + 3, 0, 255, 0);
-				   				 			
-	gfx.PutPixel(x_static + 4, y_static + 5, 0, 255, 0);
-	gfx.PutPixel(x_static + 3, y_static + 5, 0, 255, 0);
-	gfx.PutPixel(x_static + 5, y_static + 5, 0, 255, 0);
-	gfx.PutPixel(x_static + 5, y_static + 4, 0, 255, 0);
-	gfx.PutPixel(x_static + 5, y_static + 3, 0, 255, 0);
+	DrawBox(x_static, y_static, 0, 255, 0);
 }
