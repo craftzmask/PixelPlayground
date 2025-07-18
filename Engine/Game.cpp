@@ -192,7 +192,7 @@ int Game::ClampScreenY(int y)
 void Game::ComposeFrame()
 {
 	Color c(255, 255, 255);
-	gfx.DrawRect(x, y, x + width, y + height, c);
+	gfx.DrawRectDim(x, y, width, height, c);
 
 	/*
 	DrawBox(x_static0, y_static0, 0, 255, 0);
