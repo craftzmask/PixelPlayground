@@ -40,6 +40,48 @@ void Game::UpdateModel()
 {
 	if (wnd.kbd.KeyIsPressed(VK_UP))
 	{
+		y = y - 3;
+	}
+
+	if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	{
+		y = y + 3;
+	}
+
+	if (wnd.kbd.KeyIsPressed(VK_LEFT))
+	{
+		x = x - 3;
+	}
+
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+	{
+		x = x + 3;
+	}
+
+
+	if (wnd.kbd.KeyIsPressed('W'))
+	{
+		--height;
+	}
+
+	if (wnd.kbd.KeyIsPressed('S'))
+	{
+		++height;
+	}
+
+	if (wnd.kbd.KeyIsPressed('A'))
+	{
+		--width;
+	}
+
+	if (wnd.kbd.KeyIsPressed('D'))
+	{
+		++width;
+	}
+
+	/*
+	if (wnd.kbd.KeyIsPressed(VK_UP))
+	{
 		y_mobile = y_mobile - 3;
 	}
 
@@ -66,6 +108,7 @@ void Game::UpdateModel()
 
 	x_mobile = ClampScreenX(x_mobile);
 	y_mobile = ClampScreenY(y_mobile);
+	*/
 }
 
 void Game::DrawBox(int x, int y, int r, int g, int b)
@@ -91,6 +134,7 @@ void Game::DrawBox(int x, int y, int r, int g, int b)
 	gfx.PutPixel(x + 5, y + 4, r, g, b);
 	gfx.PutPixel(x + 5, y + 3, r, g, b);
 }
+
 
 bool Game::OverlapTest(int box0x, int box0y, int box1x, int box1y)
 {
@@ -147,6 +191,10 @@ int Game::ClampScreenY(int y)
 
 void Game::ComposeFrame()
 {
+	Color c(255, 255, 255);
+	gfx.DrawRect(x, y, x + width, y + height, c);
+
+	/*
 	DrawBox(x_static0, y_static0, 0, 255, 0);
 	DrawBox(x_static1, y_static1, 0, 255, 0);
 	DrawBox(x_static2, y_static2, 0, 255, 0);
@@ -160,4 +208,5 @@ void Game::ComposeFrame()
 	{
 		DrawBox(x_mobile, y_mobile, 255, 255, 255);
 	}
+	*/
 }

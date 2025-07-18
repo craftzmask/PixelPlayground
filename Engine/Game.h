@@ -46,6 +46,10 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	int x = 400;
+	int y = 300;
+	int width = 100;
+	int height = 100;
 	int x_mobile = 400;
 	int y_mobile = 300;
 	int x_static0 = 200;
